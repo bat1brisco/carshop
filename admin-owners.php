@@ -58,42 +58,67 @@ require_once 'function.php';
         <table class="main">
           <center><h2>CAR UNIT OWNER</h2></center>
           <tr>
-            <td class="mubokaayo"><h4>ID</h4></td>
-            <td class="taas"><h4>Full Name</h4></td>
-            <td class="taas"><h4>Address</h4></td>
-            <td class="medyo"><h4>Contact</h4></td>
-            <td class="mubokaayo"><img onclick="document.getElementById('addCarOwner').style.display='block' " src='images/add.png' alt='Smiley face' width='50' height='50' align='right' ></td>
-
+              <td class="mubokaayo"><h4>ID</h4></td>
+              <td class="taas"><h4>Full Name</h4></td>
+              <td class="taas"><h4>Address</h4></td>
+              <td class="medyo"><h4>Contact</h4></td>
+              <td class="medyo"><h4>Email</h4></td>
+              <td class="mubokaayo"><img onclick="document.getElementById('addCarOwner').style.display='block' " src='images/add.png' alt='Smiley face' width='30' height='30' align='right' ></td>
             </tr>
           <?php 
             $carowners = new database();
             $owns = $carowners->showowners();
             while ($owners = mysqli_fetch_assoc($owns)) {
               echo "<tr>";
-              echo "<td> <h4>".$owners['carOwner_id']."</h4></td>";
-              echo "<td> <h4>".$owners['carOwner_fullName']."</h4></td>";
-              echo "<td> <h4>".$owners['carOwner_address']."</h4></td>";
-              echo "<td> <h4>".$owners['carOwner_contact']."</h4></td>";
+              echo "<td> <h5>".$owners['carOwner_id']."</h5></td>";
+              echo "<td> <h5>".$owners['carOwner_fullName']."</h5></td>";
+              echo "<td> <h5>".$owners['carOwner_address']."</h5></td>";
+              echo "<td> <h5>".$owners['carOwner_contact']."</h5></td>";
+              echo "<td> <h5>".$owners['email']."</h5></td>";
+              echo "<td><h5 ><a href='delete.php?=".$owners['carOwner_id']."'><img src='images/delete.png' alt='Smiley face' width='25' height='25' align='right' ></a></h5>";
+              echo "<td><h5 ><a href='notify.php?=".$owners['carOwner_id']."'><img src='images/notify.png' alt='Smiley face' width='25' height='25' align='right' ></a></h5>";
               echo "</tr>";
             }
-           ?>
+           ?> 
         </table>
+
           <div id="addCarOwner" class="w3-modal">
               <div id="form-main">
                 <div id="form-div">
-                  <span onclick="document.getElementById('addCarOwner').style.display='none' " class="w3-button w3-display-topright">&times;</span>
-                  <form class="form" id="form1">
-                      <input name="name" type="text" placeholder="FullName"/> <br>
-                      <input name="email" type="text" placeholder="Email"/> <br>
-                      <input type="submit" value="SEND" id="button-blue"/>
-                    </div>
-                  </form>
+                  <span onclick="document.getElementById('addCarOwner').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                    <form class="form" id="form1" action="" method="POST">
+                      <input type="text" name="name" placeholder="Full Name" required/> <br>
+                      <input type="text" name="address" placeholder="Address" required> <br>
+                      <input type="email" name="email" placeholder="Email"> <br>
+                      <input type="text" name="contact" placeholder="Contact #" required> <br>
+                      <input type="text" name="username" placeholder="Username" required> <br>
+                      <input type="password" name="password" placeholder="Password" required>  <br>
+                      <input type="submit" name="submit" value="Register" id="button-blue"/> 
+                   
+                    </form>
+
+                    <?php 
+                      $add = new database();
+
+                      if (isset($_POST['submit'])) {
+                        $fullname = $_POST['name'];
+                        $address = $_POST['address'];
+                        $contact = $_POST['contact'];
+                        $email = $_POST['email'];
+                        $username = $_POST['username'];
+                        $password = $_POST['password'];
+
+                        $owners = $add->createAccounts($fullname, $address, $contact, $email, $username, $password);
+                      }
+                        
+                     ?>
+                   </div>
                 </div>
               </div>
           </div>
     <!--==============================footer=================================-->
     <footer>
-      <div class="main"> <span>Copyright &copy; <a href="#">Domain Name</a> All Rights Reserved</span> Design by <a target="_blank" href="http://www.templatemonster.com/">TemplateMonster.com</a> </div>
+      <div class="main"> <span>Copyright &copy; <a href="#">ASITI</a> All Rights Reserved</span> Design by ASITI <a target="_blank" href="http://www.templatemonster.com/">TemplateMonster.com</a> </div>
     </footer>
   </div>
 </div>

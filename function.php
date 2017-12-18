@@ -30,15 +30,15 @@
 
 
 
-		function createAccounts($fullname, $address, $contact){
-			$sql = "INSERT INTO carowner(carOwner_fullName, carOwner_address, carOwner_contact)";
+		function createAccounts($fullname, $address, $contact, $email, $username, $password){
+			$sql = "INSERT INTO carowner(carOwner_fullName, carOwner_address, carOwner_contact, email, username, password) VALUES('$fullname', '$address', '$contact', '$email', '$username', '$password')";
+
 			$db = mysqli_query($this->dbConnect, $sql);
-
-			if($db){
+			if(!$db){
 				echo "kill Shit";
-
 			}
 		}
+
 		function create(){
 			$sql = "INSERT INTO carowner(carOwner_fullName, carOwner_address, carOwner_contact)";
 			$db = mysqli_query($this->dbConnect, $sql);
