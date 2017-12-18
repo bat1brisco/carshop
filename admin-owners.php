@@ -63,6 +63,7 @@ require_once 'function.php';
             <td class="taas"><h4>Address</h4></td>
             <td class="medyo"><h4>Contact</h4></td>
             <td class="mubokaayo"><img onclick="document.getElementById('addCarOwner').style.display='block' " src='images/add.png' alt='Smiley face' width='50' height='50' align='right' ></td>
+
             </tr>
           <?php 
             $carowners = new database();
