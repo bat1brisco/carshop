@@ -69,15 +69,19 @@ require_once 'function.php';
             $carowners = new database();
             $owns = $carowners->showowners();
             while ($owners = mysqli_fetch_assoc($owns)) {
-              echo "<tr>";
-              echo "<td> <h5>".$owners['carOwner_id']."</h5></td>";
-              echo "<td> <h5>".$owners['carOwner_fullName']."</h5></td>";
-              echo "<td> <h5>".$owners['carOwner_address']."</h5></td>";
-              echo "<td> <h5>".$owners['carOwner_contact']."</h5></td>";
-              echo "<td> <h5>".$owners['email']."</h5></td>";
-              echo "<td><h5 ><a href='delete.php?=".$owners['carOwner_id']."'><img src='images/delete.png' alt='Smiley face' width='25' height='25' align='right' ></a></h5>";
-              echo "<td><h5 ><a href='notify.php?=".$owners['carOwner_id']."'><img src='images/notify.png' alt='Smiley face' width='25' height='25' align='right' ></a></h5>";
-              echo "</tr>";
+              if($owners['flag'] == 1){
+                echo "<tr>";
+                echo "<td> <h5>".$owners['carOwner_id']."</h5></td>";
+                echo "<td> <h5>".$owners['carOwner_fullName']."</h5></td>";
+                echo "<td> <h5>".$owners['carOwner_address']."</h5></td>";
+                echo "<td> <h5>".$owners['carOwner_contact']."</h5></td>";
+                echo "<td> <h5>".$owners['email']."</h5></td>";
+                echo "<td><h5 ><a href='delete.php?id=".$owners['carOwner_id']."'><img src='images/delete.png' alt='Smiley face' width='25' height='25' align='right' ></a></h5>";
+                echo "<td><h5 ><a href='edit.php?id=".$owners['carOwner_id']."'><img src='images/edit.png' alt='Smiley face' width='25' height='25' align='right' ></a></h5>";
+                echo "<td><h5 ><a href='notify.php?id=".$owners['carOwner_id']."'><img src='images/notify.png' alt='Smiley face' width='25' height='25' align='right' ></a></h5>";
+                echo "</tr>";
+              }
+              
             }
            ?> 
         </table>

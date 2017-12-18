@@ -48,6 +48,15 @@
 
 			}
 		}
+		function delete($id){
+
+			$sql = "UPDATE `carowner` SET `flag` = '0' WHERE `carowner`.`carOwner_id` = $id;";
+
+			$delete = mysqli_query($this->dbConnect, $sql);
+
+			return 1;
+			
+		}
 
 
 		function read(){
@@ -61,10 +70,6 @@
 			$sql = "UPDATE_CODE";
 
 			$db = mysqli_query($this->dbConnect, $sql);
-		}
-
-		function delete(){
-			$sql = "DELETE_CODE";
 		}	
 			
 	}
