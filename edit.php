@@ -55,63 +55,26 @@ require_once 'function.php';
       </div>
     </header>
     <!--==============================content================================-->
-        <table class="main">
-          <center><h2>CAR UNIT OWNER</h2></center>
-          <tr>
-              <td class="taas"><h4>Full Name</h4></td>
-              <td class="taas"><h4>Address</h4></td>
-              <td class="medyo"><h4>Contact</h4></td>
-              <td class="medyo"><h4>Email</h4></td>
-              <td class="mubokaayo"><img onclick="document.getElementById('addCarOwner').style.display='block' " src='images/add.png' alt='Smiley face' width='30' height='30' align='right' ></td>
-            </tr>
-          <?php 
-            $carowners = new database();
-            $owns = $carowners->showowners();
-            while ($owners = mysqli_fetch_assoc($owns)) {
-              if($owners['flag'] == 1){
-                echo "<tr>";
-                echo "<td> <h5>".$owners['carOwner_fullName']."</h5></td>";
-                echo "<td> <h5>".$owners['carOwner_address']."</h5></td>";
-                echo "<td> <h5>".$owners['carOwner_contact']."</h5></td>";
-                echo "<td> <h5>".$owners['email']."</h5></td>";
-                echo "<td><h5 ><a href='delete.php?id=".$owners['carOwner_id']."'><img src='images/delete.png' alt='Smiley face' width='25' height='25' align='right' ></a></h5>";
-                echo "<td><h5 ><a href='edit.php?id=".$owners['carOwner_id']."'><img src='images/edit.png' alt='Smiley face' width='25' height='25' align='right' ></a></h5>";
-                echo "<td><h5 ><a href='notify.php?id=".$owners['carOwner_id']."'><img src='images/notify.png' alt='Smiley face' width='25' height='25' align='right' ></a></h5>";
-                echo "</tr>";
-              }
-              
-            }
-           ?> 
-        </table>
 
-          <div id="addCarOwner" class="w3-modal">
+    		<?php 
+						require_once 'function.php';
+						$database = new database();
+						$id = $_GET['id'];
+						$ret = $database->showOwner($id);
+
+					 ?>
+          <div>
               <div id="form-main">
                 <div id="form-div">
-                  <span onclick="document.getElementById('addCarOwner').style.display='none'" class="w3-button w3-display-topright">&times;</span>
                     <form class="form" id="form1" action="" method="POST">
-                      <input type="text" name="name" placeholder="Full Name" required/> <br>
-                      <input type="text" name="address" placeholder="Address" required> <br>
-                      <input type="email" name="email" placeholder="Email"> <br>
-                      <input type="text" name="contact" placeholder="Contact #" required> <br>
-                      <input type="text" name="username" placeholder="Username" required> <br>
-                      <input type="password" name="password" placeholder="Password" required>  <br>
+                      <input type="text" name="name" placeholder="Full Name" <?php echo "value=".$ret['carOwner_fullName'].""; ?> required/> <br>
+                      <input type="text" name="address" placeholder="Address" <?php echo "value=".$ret['carOwner_address'].""; ?>  required> <br>
+                      <input type="email" name="email" placeholder="Email" <?php echo "value=".$ret['email'].""; ?> > <br>
+                      <input type="text" name="contact" placeholder="Contact #" <?php echo "value=".$ret['carOwner_contact'].""; ?>  required> <br>
+                      <input type="text" name="username" placeholder="Username" <?php echo "value=".$ret['username'].""; ?>  required> <br>
                       <input type="submit" name="submit" value="Register" id="button-blue"/> 
-                   
                     </form>
-
-                    <?php 
-                      $add = new database();
-                      if (isset($_POST['submit'])) {
-                        $fullname = $_POST['name'];
-                        $address = $_POST['address'];
-                        $contact = $_POST['contact'];
-                        $email = $_POST['email'];
-                        $username = $_POST['username'];
-                        $password = $_POST['password'];
-                        $owners = $add->createAccounts($fullname, $address, $contact, $email, $username, $password);
-                      }
-                        
-                     ?>
+                    
                    </div>
                 </div>
               </div>
@@ -124,4 +87,4 @@ require_once 'function.php';
 </div>
 <script type="text/javascript">Cufon.now();</script>
 </body>
-</html>
+</html>	
