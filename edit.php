@@ -1,6 +1,4 @@
-<?php 
-require_once 'function.php';
- ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,18 +23,17 @@ require_once 'function.php';
     <header>
       <div class="main">
         <div class="wrapper">
-          <h1><a href="index.php">Car Repair</a></h1>
+          <a href="home.php"><img src='images/ASITI.png' alt='Smiley face' width='200' height='200'></a>
           <div class="fright">
             <div class="indent"> <span class="address">8901 Marmora Road, Glasgow, D04 89GR</span> <span class="phone">Tel: +1 959 552 5963</span> </div>
           </div>
         </div>
         <nav>
           <ul class="menu">
-            <li><a href="index.php">Home</a></li>
-            <li><a href="carunits.php">Car Units</a></li>
-            <li><a href="maintenance.php">Car Owners </a></li>
+            <li><a href="home.php">Home</a></li>
+            <li><a href="admin-carunits.php">Car Units</a></li>
             <li><a href="repair.php">Repairs</a></li>
-            <li><a class="active" href="locations.php">Car Units</a></li>
+            <li><a  href="admin-owners.php">Car Owners</a></li>
               </ul>
             <div class='center'>
                 <img onclick="document.getElementById('id01').style.display='block' " src='images/imagess.png' alt='Smiley face' width='50' height='50' align='right' >
@@ -57,12 +54,12 @@ require_once 'function.php';
     <!--==============================content================================-->
 
     		<?php 
-						require_once 'function.php';
-						$database = new database();
-						$id = $_GET['id'];
-						$ret = $database->showOwner($id);
+				require_once 'function.php';
 
-					 ?>
+				$database = new database();
+				$id = $_GET['id'];
+				$ret = $database->showOwner($id);
+			?>
           <div>
               <div id="form-main">
                 <div id="form-div">
@@ -71,10 +68,24 @@ require_once 'function.php';
                       <input type="text" name="address" placeholder="Address" <?php echo "value=".$ret['carOwner_address'].""; ?>  required> <br>
                       <input type="email" name="email" placeholder="Email" <?php echo "value=".$ret['email'].""; ?> > <br>
                       <input type="text" name="contact" placeholder="Contact #" <?php echo "value=".$ret['carOwner_contact'].""; ?>  required> <br>
-                      <input type="text" name="username" placeholder="Username" <?php echo "value=".$ret['username'].""; ?>  required> <br>
+                      <input type="text" name="username" placeholder="Username" <?php echo "value=".$ret['user'].""; ?>  required> <br>
                       <input type="submit" name="submit" value="Register" id="button-blue"/> 
                     </form>
-                    
+                    <?php 
+                    	if(isset($_POST['submit'])){
+                    		$fullname = $_POST['name'];
+                    		$address  = $_POST['address'];
+                    		$email  = $_POST['email'];
+                    		$contact  = $_POST['contact'];
+                    		$username  = $_POST['username'];
+                    		$edit = $database->edit($fullname, $address, $contact, $email, $username, $id);
+                    		if($edit == 1){
+                    			header("location:admin-owners.php");
+                    		}else{
+                    			echo "ERROR EDITING INFORMATION";
+                    		}
+                    	}
+                     ?>
                    </div>
                 </div>
               </div>

@@ -25,18 +25,17 @@ require_once 'function.php';
     <header>
       <div class="main">
         <div class="wrapper">
-          <h1><a href="index.php">Car Repair</a></h1>
+          <a href="home.php"><img src='images/ASITI.png' alt='Smiley face' width='200' height='200'></a>
           <div class="fright">
             <div class="indent"> <span class="address">8901 Marmora Road, Glasgow, D04 89GR</span> <span class="phone">Tel: +1 959 552 5963</span> </div>
           </div>
         </div>
         <nav>
           <ul class="menu">
-            <li><a href="index.php">Home</a></li>
-            <li><a href="carunits.php">Car Units</a></li>
-            <li><a href="maintenance.php">Car Owners </a></li>
+            <li><a href="home.php">Home</a></li>
+            <li><a  href="admin-carunits.php">Car Units</a></li>
             <li><a href="repair.php">Repairs</a></li>
-            <li><a class="active" href="locations.php">Car Units</a></li>
+            <li><a class="active" href="admin-owners.php">Car Owners</a></li>
               </ul>
             <div class='center'>
                 <img onclick="document.getElementById('id01').style.display='block' " src='images/imagess.png' alt='Smiley face' width='50' height='50' align='right' >
@@ -74,9 +73,10 @@ require_once 'function.php';
                 echo "<td> <h5>".$owners['carOwner_address']."</h5></td>";
                 echo "<td> <h5>".$owners['carOwner_contact']."</h5></td>";
                 echo "<td> <h5>".$owners['email']."</h5></td>";
-                echo "<td><h5 ><a href='delete.php?id=".$owners['carOwner_id']."'><img src='images/delete.png' alt='Smiley face' width='25' height='25' align='right' ></a></h5>";
-                echo "<td><h5 ><a href='edit.php?id=".$owners['carOwner_id']."'><img src='images/edit.png' alt='Smiley face' width='25' height='25' align='right' ></a></h5>";
-                echo "<td><h5 ><a href='notify.php?id=".$owners['carOwner_id']."'><img src='images/notify.png' alt='Smiley face' width='25' height='25' align='right' ></a></h5>";
+                echo "<td><h5 ><a href='addcars.php?id=".$owners['carOwner_id']."'><img src='images/cars.png' alt='Smiley face' width='40' height='40'  ></a></h5>";
+                echo "<td><h5 ><a href='delete.php?id=".$owners['carOwner_id']."'><img src='images/delete.png' alt='Smiley face' width='25' height='25'  ></a></h5>";
+                echo "<td><h5 ><a href='edit.php?id=".$owners['carOwner_id']."'><img src='images/edit.png' alt='Smiley face' width='25' height='25' ></a></h5>";
+                echo "<td><h5 ><a href='notify.php?id=".$owners['carOwner_id']."'><img src='images/notify.png' alt='Smiley face' width='25' height='25' ></a></h5>";
                 echo "</tr>";
               }
               

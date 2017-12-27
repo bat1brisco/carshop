@@ -24,19 +24,17 @@
     <header>
       <div class="main">
         <div class="wrapper">
-          <h1><a href="index.php">Car Repair</a></h1>
+          <a href="home.php"><img src='images/ASITI.png' alt='Smiley face' width='200' height='200'></a>
           <div class="fright">
             <div class="indent"> <span class="address">8901 Marmora Road, Glasgow, D04 89GR</span> <span class="phone">Tel: +1 959 552 5963</span> </div>
           </div>
         </div>
         <nav>
           <ul class="menu">
-            <li><a class="active" href="index.php">Home</a></li>
-            <li><a href="about.php">About Us</a></li>
-            <li><a href="maintenance.php">Maintenance </a></li>
-            <li><a href="repair.php">Repair</a></li>
-            <li><a href="price.php">Price List</a></li>
-            <li><a href="locations.php">Locations</a></li>
+            <li><a class="active" href="home.php">Home</a></li>
+            <li><a href="admin-carunits.php">Car Units</a></li>
+            <li><a href="repair.php">Repairs</a></li>
+            <li><a href="admin-owners.php">Car Owners</a></li>
           </ul>
         </nav>
         <div class="slider-wrapper">

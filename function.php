@@ -14,11 +14,12 @@
 			return $db;
 		}
 		function checkUser($username, $password){
-			$sql = "SELECT * FROM carowner WHERE username = '$username' && password = '$password'";
+			$sql = "SELECT * FROM carowner WHERE `user` = '$username' OR `pass` = '$password'";
 			$db = mysqli_query($this->dbConnect, $sql);
-			$user = mysqli_fetch_assoc($db);
-			if($username == $user['username'] && $password == $user['password']){
-				$ret = 1;
+			$user = mysqli_fetch_array($db);
+			
+			if($user['user'] == $username || $user['pass'] == $password){
+				$ret = 1; 
 			}else{
 				$ret = 0;
 			}
@@ -37,11 +38,16 @@
 			$delete = mysqli_query($this->dbConnect, $sql);
 			return 1;
 		}
-		function edit($fullname, $address, $contact, $email, $username, $password){
-			$sql = "UPDATE `carowner` SET `carOwner_fullName` = '$fullname', `carOwner_address` = '$address', `carOwner_contact` = '$contact', `username` = ' $username', `password` = '$password', `email` = '$email' WHERE `carowner`.`carOwner_id` = $id;";
+		function edit($fullname, $address, $contact, $email, $username, $id){
+			$sql = "UPDATE `carowner` SET `carOwner_fullName` = '$fullname', `carOwner_address` = '$address', `carOwner_contact` = '$contact', `username` = ' $username', `email` = '$email' WHERE `carowner`.`carOwner_id` = $id;";
 			$db = mysqli_query($this->dbConnect, $sql);
 
-			return 1;
+			if($db){
+				$ret = 1;
+			}else{
+				$ret = 0;
+			}
+			return $ret;
 		}
 		function update(){
 			$sql = "UPDATE_CODE";
@@ -53,8 +59,25 @@
 			$fetch = mysqli_fetch_array($db);
 			return $fetch;
 		}
+		function addCars($carbrand, $carmodel, $carmodelyear, $cartype, $id){
+			$sql = "INSERT INTO carunit(carUnitType, car_brand, car_model, car_modelyear, carOwner_id) VALUES('$cartype', '$carmodel', '$carmodelyear', '$carbrand', $id)";
+			$db = mysqli_query($this->dbConnect, $sql);
 			
+			return $db;
+		}	
+		public function message($id){
+			$query = "SELECT * FROM messageTemplate WHERE message_id = $id;"; 
+			$que = mysqli_query($this->dbConnect, $query);
+			$res = mysqli_fetch_assoc($que);
+			return $res['message'];
+		}
+		public function searchNumber($id){
+			$query = "SELECT carOwner_contact FROM carowner WHERE carOwner_id = $id;";
+			$q = mysqli_query($this->dbConnect, $query);
+			$ret = mysqli_fetch_assoc($q);
+			return $ret['carOwner_contact'];
+		}
 	}
 
 
- ?>
+ ?>		

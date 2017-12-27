@@ -25,18 +25,17 @@ require_once 'function.php';
     <header>
       <div class="main">
         <div class="wrapper">
-          <h1><a href="index.php">Car Repair</a></h1>
+          <a href="home.php"><img src='images/ASITI.png' alt='Smiley face' width='200' height='200'></a>
           <div class="fright">
             <div class="indent"> <span class="address">8901 Marmora Road, Glasgow, D04 89GR</span> <span class="phone">Tel: +1 959 552 5963</span> </div>
           </div>
         </div>
         <nav>
           <ul class="menu">
-            <li><a href="index.php">Home</a></li>
-            <li><a href="carunits.php">Car Units</a></li>
-            <li><a href="maintenance.php">Car Owners </a></li>
+            <li><a href="home.php">Home</a></li>
+            <li><a class="active" href="admin-carunits.php">Car Units</a></li>
             <li><a href="repair.php">Repairs</a></li>
-            <li><a class="active" href="locations.php">Car Units</a></li>
+            <li><a href="admin-owners.php">Car Owners</a></li>
               </ul>
             <div class='center'>
                 <img onclick="document.getElementById('id01').style.display='block' " src='images/imagess.png' alt='Smiley face' width='50' height='50' align='right' >
@@ -58,10 +57,10 @@ require_once 'function.php';
     <!--==============================content================================-->
         <table class="main">
           <tr>
-            <td><h4>Car Unit ID</h4></td>
             <td><h4>Car Unit Type</h4></td>
             <td><h4>Car Brand</h4></td>
             <td><h4>Car Model</h4></td>
+            <td><h4>Owners ID</h4></td>
             </tr>
           <?php 
             $carunit = new database();
@@ -69,10 +68,10 @@ require_once 'function.php';
             $cars = $carunit->showcars();
             while ($car = mysqli_fetch_assoc($cars)) {
               echo "<tr>";
-              echo "<td> <h4>".$car['carUnit_id']."</h4></td>";
-              echo "<td> <h4>".$car['carUnitType']."</h4></td>";
-              echo "<td> <h4>".$car['car_brand']."</h4></td>";
-              echo "<td> <h4>".$car['car_model']."</h4></td>";
+              echo "<td> <h5>".$car['carUnitType']."</h5></td>";
+              echo "<td> <h5>".$car['car_brand']."</h5></td>";
+              echo "<td> <h5>".$car['car_model']."</h5></td>";
+              echo "<td> <h5>".$car['carOwner_id']."</h5></td>";
               echo "</tr>";
             }
            ?>

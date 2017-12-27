@@ -31,21 +31,22 @@
 
     <div class="right" align="right">
         <form id="contact-form" action="" method="POST">
-            <input type="text" name="username" placeholder="Username"><br>
-            <input type="password" name="password" placeholder="Password"><br>
+            <input style="width: 30%" type="text" name="username" placeholder="Username"><br>
+            <input style="width: 30%" type="password" name="password" placeholder="Password"><br>
             <input class="submit" type="submit" name="submit" value="Login">
         </form>
         <?php 
             if(isset($_POST['submit'])){
                 $checkUser = new database();
                 $check = $checkUser->checkUser($_POST['username'], $_POST['password']);
-                if($check){
-                        header("location:home.php");
+               
+                if($check == 1){
+                        header("location:admin-owners.php");
                 }else{
-                    echo "<p>Wrong Password</p>";
+                    echo "Wrong Password";
                 }
+            
             }
-
          ?>
     </div>
 </div>  
