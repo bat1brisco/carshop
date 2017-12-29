@@ -3,6 +3,18 @@
 <head>
     <?php 
         require_once 'function.php';
+        
+        session_start();
+
+
+        if(isset($_SESSION['login-user'])){
+          header('location:home.php');
+        }
+        if(isset($_SESSION['admin'])){
+            header("location:admin-owners.php");   
+        }
+       
+
     ?>
 	<title>ASITI</title>
 <meta charset="utf-8">
@@ -37,15 +49,31 @@
         </form>
         <?php 
             if(isset($_POST['submit'])){
+                $user = $_POST['username'];
+                $pass = $_POST['password'];
                 $checkUser = new database();
-                $check = $checkUser->checkUser($_POST['username'], $_POST['password']);
+                $check = $checkUser->checkUser($user, $pass);
                
-                if($check == 1){
-                        header("location:admin-owners.php");
-                }else{
-                    echo "Wrong Password";
+                $userTest = $check['user'];
+                $passTest = $check['pass'];
+                $admin = $check['admin'];
+                $flag = $check['flag'];
+                if($flag == 1){    
+                    if($user == $userTest && $pass == $passTest){
+                        if($admin == 1){
+                            $_SESSION['admin'] = true;
+                            header("location:admin-owners.php");
+                        }
+                        else if($admin == 0){
+                            $_SESSION['login-user'] = true;
+                            header("location:home.php");
+                        }
+                    }else{
+                        echo "Wrong Username";
+                    }
+                }else{  
+                    echo "Account Deleted";
                 }
-            
             }
          ?>
     </div>

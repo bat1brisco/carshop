@@ -18,12 +18,12 @@
 			$db = mysqli_query($this->dbConnect, $sql);
 			$user = mysqli_fetch_array($db);
 			
-			if($user['user'] == $username || $user['pass'] == $password){
-				$ret = 1; 
-			}else{
-				$ret = 0;
-			}
-			return $ret;
+			// if($user['user'] == $username || $user['pass'] == $password){
+			// 	$ret = 1; 
+			// }else{
+			// 	$ret = 0;
+			// }
+			return $user;
 		}
 		function createAccounts($fname, $lname, $address, $contact, $email, $username, $password){
 			$sql = "INSERT INTO carowner(carowner_fname, carowner_lname, carOwner_address, carOwner_contact, email, username, password) VALUES('$fname', '$lname', '$address', '$contact', '$email', '$username', '$password')";

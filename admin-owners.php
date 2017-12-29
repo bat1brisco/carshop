@@ -1,6 +1,14 @@
 <?php 
-require_once 'function.php';
+    require_once 'function.php';
+
+    session_start();
+
+    if(!isset($_SESSION['admin'])){
+      header("location:index.php");
+    }
+
  ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,7 +52,7 @@ require_once 'function.php';
                 <div class="w3-container">
                   <span onclick="document.getElementById('id01').style.display='none' " class="w3-button w3-display-topright">&times;</span>
                     <img src="images/imagess.png" align="center" class="center"><br>
-                    <button onclick="">Logout</button>
+                    <a href="logout.php">Sign Out</a>
                 </div>
               </div>
             </div>

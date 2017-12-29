@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<?php 
+    require_once 'function.php';
+    session_start();
+
+    if (!isset($_SESSION['login-user'])) {
+      header("location:index.php");
+    }
+ ?>
 <html lang="en">
 <head>
 <title>Car Repair</title>
@@ -6,6 +14,8 @@
 <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen">
 <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="css/grid.css" type="text/css" media="screen">
+<link rel="stylesheet" type="text/css" href="css/w3.css">
+
 <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
 <script src="js/cufon-yui.js" type="text/javascript"></script>
 <script src="js/cufon-replace.js" type="text/javascript"></script>
@@ -21,7 +31,7 @@
 <div class="main-bg">
   <div class="bg">
     <!--==============================header=================================-->
-    <header>
+     <header>
       <div class="main">
         <div class="wrapper">
           <a href="home.php"><img src='images/ASITI.png' alt='Smiley face' width='200' height='200'></a>
@@ -32,10 +42,23 @@
         <nav>
           <ul class="menu">
             <li><a class="active" href="home.php">Home</a></li>
-            <li><a href="admin-carunits.php">Car Units</a></li>
-            <li><a href="repair.php">Repairs</a></li>
-            <li><a href="admin-owners.php">Car Owners</a></li>
-          </ul>
+            <li><a href="#">Mechanics</a></li>
+            <li><a href="#">My Car</a></li>
+            <li><a href="#">About</a></li>
+              </ul>
+            <div class='center'>
+                <img onclick="document.getElementById('id01').style.display='block' " src='images/imagess.png' alt='Smiley face' width='50' height='50' align='right' >
+            <div id="id01" class="w3-modal">
+              <div class="w3-modal-content">
+                <div class="w3-container">
+                  <span onclick="document.getElementById('id01').style.display='none' " class="w3-button w3-display-topright">&times;</span>
+                    <img src="images/imagess.png" align="center" class="center"><br>
+                    <a href="logout.php">Sign Out</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </nav>
         <div class="slider-wrapper">
           <div class="slider">
@@ -46,6 +69,7 @@
             </ul>
           </div>
           <a class="prev" href="#">prev</a> <a class="next" href="#">next</a> </div>
+      </div>
       </div>
     </header>
     <!--==============================content================================-->
