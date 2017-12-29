@@ -1,4 +1,6 @@
-
+<?php 
+require_once 'function.php';
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,8 +34,8 @@
           <ul class="menu">
             <li><a href="home.php">Home</a></li>
             <li><a href="admin-carunits.php">Car Units</a></li>
-            <li><a href="repair.php">Repairs</a></li>
-            <li><a  href="admin-owners.php">Car Owners</a></li>
+            <li><a class="active" href="repair.php">Repairs</a></li>
+            <li><a href="admin-owners.php">Car Owners</a></li>
               </ul>
             <div class='center'>
                 <img onclick="document.getElementById('id01').style.display='block' " src='images/imagess.png' alt='Smiley face' width='50' height='50' align='right' >
@@ -52,43 +54,31 @@
       </div>
     </header>
     <!--==============================content================================-->
+    <div class="main">
+            <form method="post" action="upload.php" enctype="multipart/form-data" id="uploadForm">
+                <input type="file" name="file" id="file" />
+                <input type="submit" name="submit" value="Upload"/>
+            </form>
 
-    		<?php 
-				require_once 'function.php';
 
-				$database = new database();
-				$id = $_GET['id'];
-				$ret = $database->showOwner($id);
-			?>
-          <div>
-              <div id="form-main">
-                <div id="form-div">
-                    <form class="form" id="form1" action="" method="POST">
-                      <input type="text" name="fname" placeholder="First Name" <?php echo "value=".$ret['carowner_fname'].""; ?> required/> <br>
-                      <input type="text" name="lname" placeholder="Last Name" <?php echo "value=".$ret['carowner_lname'].""; ?> required/> <br>
-                      <input type="text" name="address" placeholder="Address" <?php echo "value=".$ret['carOwner_address'].""; ?>  required/> <br>
-                      <input type="email" name="email" placeholder="Email" <?php echo "value=".$ret['email'].""; ?> /> <br>
-                      <input type="text" name="contact" placeholder="Contact #" <?php echo "value=".$ret['carOwner_contact'].""; ?>  required/> <br>
-                      <input type="submit" name="submit" value="Register" id="button-blue"/> 
-                    </form>
-                    <?php 
-                    	if(isset($_POST['submit'])){
-                    		$fname = $_POST['fname'];
-                        $lname = $_POST['lname'];
-                    		$address  = $_POST['address'];
-                    		$email  = $_POST['email'];
-                    		$contact  = $_POST['contact'];
-                    		$edit = $database->edit($fname, $lname, $address, $contact, $email, $id);
-                    		if($edit == 1){
-                    			header("location:admin-owners.php");
-                    		}else{
-                    			echo "ERROR EDITING INFORMATION";
-                    		}
-                    	}
-                     ?>
-                   </div>
-                </div>
-              </div>
+            <script src="js/jquery.js" type="text/javascript"></script>
+            <script type="text/javascript">
+              function filePreview(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#uploadForm + embed').remove();
+                  $('#uploadForm').after('<embed src="'+e.target.result+'" >');
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            $("#file").change(function () {
+                filePreview(this);
+            });
+            </script>
+
+          </div>
           </div>
     <!--==============================footer=================================-->
     <footer>
@@ -98,4 +88,4 @@
 </div>
 <script type="text/javascript">Cufon.now();</script>
 </body>
-</html>	
+</html>

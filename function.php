@@ -25,8 +25,8 @@
 			}
 			return $ret;
 		}
-		function createAccounts($fullname, $address, $contact, $email, $username, $password){
-			$sql = "INSERT INTO carowner(carOwner_fullName, carOwner_address, carOwner_contact, email, username, password) VALUES('$fullname', '$address', '$contact', '$email', '$username', '$password')";
+		function createAccounts($fname, $lname, $address, $contact, $email, $username, $password){
+			$sql = "INSERT INTO carowner(carowner_fname, carowner_lname, carOwner_address, carOwner_contact, email, username, password) VALUES('$fname', '$lname', '$address', '$contact', '$email', '$username', '$password')";
 
 			$db = mysqli_query($this->dbConnect, $sql);
 			if(!$db){
@@ -38,10 +38,9 @@
 			$delete = mysqli_query($this->dbConnect, $sql);
 			return 1;
 		}
-		function edit($fullname, $address, $contact, $email, $username, $id){
-			$sql = "UPDATE `carowner` SET `carOwner_fullName` = '$fullname', `carOwner_address` = '$address', `carOwner_contact` = '$contact', `username` = ' $username', `email` = '$email' WHERE `carowner`.`carOwner_id` = $id;";
+		function edit($fname, $lname, $address, $contact, $email, $id){
+			$sql = "UPDATE `carowner` SET `carowner_fname`='$fname', `carowner_lname`='$lname', `carOwner_address`='$address', `carOwner_contact`='$contact', `pass`='$pass', `email`='$email' WHERE `carowner`.`carOwner_id` = $id;";
 			$db = mysqli_query($this->dbConnect, $sql);
-
 			if($db){
 				$ret = 1;
 			}else{

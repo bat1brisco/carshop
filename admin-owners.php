@@ -57,7 +57,7 @@ require_once 'function.php';
         <table class="main">
           <center><h2>CAR UNIT OWNER</h2></center>
           <tr>
-              <td class="taas"><h4>Full Name</h4></td>
+              <td class="taas"><h4>Name</h4></td>
               <td class="taas"><h4>Address</h4></td>
               <td class="medyo"><h4>Contact</h4></td>
               <td class="medyo"><h4>Email</h4></td>
@@ -69,7 +69,7 @@ require_once 'function.php';
             while ($owners = mysqli_fetch_assoc($owns)) {
               if($owners['flag'] == 1){
                 echo "<tr>";
-                echo "<td> <h5>".$owners['carOwner_fullName']."</h5></td>";
+                echo "<td> <h5>".$owners['carowner_fname']." ".$owners['carowner_lname']."</h5></td>";
                 echo "<td> <h5>".$owners['carOwner_address']."</h5></td>";
                 echo "<td> <h5>".$owners['carOwner_contact']."</h5></td>";
                 echo "<td> <h5>".$owners['email']."</h5></td>";
@@ -89,7 +89,8 @@ require_once 'function.php';
                 <div id="form-div">
                   <span onclick="document.getElementById('addCarOwner').style.display='none'" class="w3-button w3-display-topright">&times;</span>
                     <form class="form" id="form1" action="" method="POST">
-                      <input type="text" name="name" placeholder="Full Name" required/> <br>
+                      <input type="text" name="fname" placeholder="First Name" required/> <br>
+                      <input type="text" name="lname" placeholder="Last Name" required/> <br>
                       <input type="text" name="address" placeholder="Address" required> <br>
                       <input type="email" name="email" placeholder="Email"> <br>
                       <input type="text" name="contact" placeholder="Contact #" required> <br>
@@ -102,13 +103,14 @@ require_once 'function.php';
                     <?php 
                       $add = new database();
                       if (isset($_POST['submit'])) {
-                        $fullname = $_POST['name'];
+                        $fname = $_POST['fname'];
+                        $lname = $_POST['lname'];
                         $address = $_POST['address'];
                         $contact = $_POST['contact'];
                         $email = $_POST['email'];
                         $username = $_POST['username'];
                         $password = $_POST['password'];
-                        $owners = $add->createAccounts($fullname, $address, $contact, $email, $username, $password);
+                        $owners = $add->createAccounts($fname, $lname, $address, $contact, $email, $username, $password);
                       }
                         
                      ?>
