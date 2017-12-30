@@ -1,0 +1,27 @@
+.calendar {
+	width: 100px;
+	border-collapse: collapse;
+	margin-top: 20px;
+}
+
+.calendar caption {
+		margin-bottom: 10px;
+}
+
+.calendar .header {
+	background: #555;
+	color: #fff;
+}
+
+.calendar tr:nth-child(odd){
+	background: #f0f0f0;
+}
+
+.calendar tr:nth-child(even){
+	background: #e0e0e0;
+}
+
+.calendar th, .calendar td{
+	padding:15px;
+	border:1px solid #eee;
+}

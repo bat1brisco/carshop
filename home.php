@@ -42,7 +42,7 @@
         <nav>
           <ul class="menu">
             <li><a class="active" href="home.php">Home</a></li>
-            <li><a href="#">Mechanics</a></li>
+            <li><a href="mechanics.php">Mechanics</a></li>
             <li><a href="#">My Car</a></li>
             <li><a href="#">About</a></li>
               </ul>
